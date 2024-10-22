@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Seu agendamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .header .close {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .service-box {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .service-box p {
+            margin: 5px 0;
+        }
+        .add-service {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #000;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .add-service i {
+            margin-right: 10px;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+        }
+        .footer button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Seu agendamento</h1>
+            <span class="close">&times;</span>
+        </div>
+        <div class="service-box">
+            <p>Purificação facial de ervas</p>
+            <p>Rua Prates, 194</p>
+            <p>Com Profissional #1 • 1 h • R$ 160</p>
+        </div>
+        <p>Gostaria de adicionar outro serviço a este agendamento?</p>
+        <div class="add-service">
+            <i class="fas fa-plus"></i>
+            <span>Adicionar serviço</span>
+        </div>
+        <div class="footer">
+            <button>Selecionar data e horário</button>
+        </div>
+    </div>
+</body>
+</html>

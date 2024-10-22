@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Espaço VIP Luciana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link rel="stylesheet" href="Styles/Style_index.css">
+</head>
+<body>
+    <div class="login">
+        <a href="#" onclick="document.getElementById('loginPopup').style.display='block'"><i class="fas fa-user"></i>Login</a>
+    </div>
+    <div class="container">
+        <h1 class="welcome">Welcome</h1>
+        <h2 class="title">Espaço VIP Luciana</h2>
+        <p class="subtitle">Salão de beleza</p>
+        <div class="button">
+            <a href="Menu Precos.html">Agende um horário</a>
+        </div>
+    </div>
+    <div class="whatsapp">
+        <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i>Vamos conversar</a>
+    </div>
+    <div id="loginPopup" class="popup">
+        <span class="close-btn" onclick="document.getElementById('loginPopup').style.display='none'">&times;</span>
+        <h2>Login</h2>
+        <form action="Login.php" method="post">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="Usuário">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" id="password" name="password" placeholder="Senha">
+            </div>
+            <button class="login-button">Acessar</button>
+        </form>
+        <a href="#" class="register-link" onclick="document.getElementById('registerPopup').style.display='block'; document.getElementById('loginPopup').style.display='none'">Registrar</a>
+    </div>
+    <div id="registerPopup" class="popup">
+        <span class="close-btn" onclick="document.getElementById('registerPopup').style.display='none'">&times;</span>
+        <h2>Registrar</h2>
+        <form action="Registro.php" method="post">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="reg_username" name="username" placeholder="Usuário">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="reg_email" name="email" placeholder="Email">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" id="reg_password" name="password" placeholder="Senha">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" id="reg_confirm_password" name="confirm_password" placeholder="Confirmar Senha">
+            </div>
+            <button class="register-button">Registrar</button>
+        </form>
+        <a href="#" class="register-link" onclick="document.getElementById('loginPopup').style.display='block'; document.getElementById('registerPopup').style.display='none'">Login</a>
+    </div>
+</body>
+</html>
