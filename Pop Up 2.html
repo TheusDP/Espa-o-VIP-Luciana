@@ -1,167 +1,167 @@
-<html></html>
-<head>
-    <title>Selecione outro serviço</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 400px;
-            margin: 50px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #ccc;
-        }
-        .header h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-        .header .close {
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .content {
-            padding: 15px;
-        }
-        .service-item {
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-        }
-        .service-item:last-child {
-            border-bottom: none;
-        }
-        .service-item label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .service-item input[type="radio"] {
-            margin-right: 10px;
-        }
-        .service-item .price {
-            margin-left: auto;
-            font-size: 14px;
-            color: #666;
-        }
-        .accordion {
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            padding: 10px 0;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .accordion:after {
-            content: '\f078';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-        }
-        .accordion.active:after {
-            content: '\f077';
-        }
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-top: 1px solid #ccc;
-        }
-        .footer button {
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .footer .back {
-            background-color: #fff;
-            color: #000;
-        }
-        .footer .next {
-            background-color: #000;
-            color: #fff;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h2>Selecione outro serviço</h2>
-            <span class="close">&times;</span>
+    <html></html>
+    <head>
+        <title>Selecione outro serviço</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #fff;
+                color: #000;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 400px;
+                margin: 50px auto;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                border-bottom: 1px solid #ccc;
+            }
+            .header h2 {
+                margin: 0;
+                font-size: 18px;
+            }
+            .header .close {
+                font-size: 18px;
+                cursor: pointer;
+            }
+            .content {
+                padding: 15px;
+            }
+            .service-item {
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+            .service-item:last-child {
+                border-bottom: none;
+            }
+            .service-item label {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+            .service-item input[type="radio"] {
+                margin-right: 10px;
+            }
+            .service-item .price {
+                margin-left: auto;
+                font-size: 14px;
+                color: #666;
+            }
+            .accordion {
+                border: none;
+                background: none;
+                width: 100%;
+                text-align: left;
+                padding: 10px 0;
+                font-size: 16px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .accordion:after {
+                content: '\f078';
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+            }
+            .accordion.active:after {
+                content: '\f077';
+            }
+            .footer {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+                border-top: 1px solid #ccc;
+            }
+            .footer button {
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .footer .back {
+                background-color: #fff;
+                color: #000;
+            }
+            .footer .next {
+                background-color: #000;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>Selecione outro serviço</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="content">
+                <button class="accordion">Tratamento facial exclusivo</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Tratamento facial exclusivo">
+                        Tratamento facial exclusivo
+                        <span class="price">R$ 200</span>
+                    </label>
+                </div>
+                <button class="accordion">Esfoliação facial</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Esfoliação facial">
+                        Esfoliação facial
+                        <span class="price">R$ 150</span>
+                    </label>
+                </div>
+                <button class="accordion">Oxigenação facial</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Oxigenação facial">
+                        Oxigenação facial
+                        <span class="price">R$ 180</span>
+                    </label>
+                </div>
+                <button class="accordion">Purificação facial de ervas</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Purificação facial de ervas">
+                        Purificação facial de ervas
+                        <span class="price">R$ 170</span>
+                    </label>
+                </div>
+                <button class="accordion">Vitamina C facial</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Vitamina C facial">
+                        Vitamina C facial
+                        <span class="price">R$ 160</span>
+                    </label>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="back">Voltar</button>
+                <button class="next">Próximo</button>
+            </div>
         </div>
-        <div class="content">
-            <button class="accordion">Tratamento facial exclusivo</button>
-            <div class="service-item">
-                <label>
-                    <input type="radio" name="service" value="Tratamento facial exclusivo">
-                    Tratamento facial exclusivo
-                    <span class="price">R$ 200</span>
-                </label>
-            </div>
-            <button class="accordion">Esfoliação facial</button>
-            <div class="service-item">
-                <label>
-                    <input type="radio" name="service" value="Esfoliação facial">
-                    Esfoliação facial
-                    <span class="price">R$ 150</span>
-                </label>
-            </div>
-            <button class="accordion">Oxigenação facial</button>
-            <div class="service-item">
-                <label>
-                    <input type="radio" name="service" value="Oxigenação facial">
-                    Oxigenação facial
-                    <span class="price">R$ 180</span>
-                </label>
-            </div>
-            <button class="accordion">Purificação facial de ervas</button>
-            <div class="service-item">
-                <label>
-                    <input type="radio" name="service" value="Purificação facial de ervas">
-                    Purificação facial de ervas
-                    <span class="price">R$ 170</span>
-                </label>
-            </div>
-            <button class="accordion">Vitamina C facial</button>
-            <div class="service-item">
-                <label>
-                    <input type="radio" name="service" value="Vitamina C facial">
-                    Vitamina C facial
-                    <span class="price">R$ 160</span>
-                </label>
-            </div>
-        </div>
-        <div class="footer">
-            <button class="back">Voltar</button>
-            <button class="next">Próximo</button>
-        </div>
-    </div>
-    <script>
-        document.querySelectorAll('.accordion').forEach(button => {
-            button.addEventListener('click', () => {
-                button.classList.toggle('active');
-                let panel = button.nextElementSibling;
-                if (panel && panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else if (panel) {
-                    panel.style.display = "block";
-                }
+        <script>
+            document.querySelectorAll('.accordion').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    let panel = button.nextElementSibling;
+                    if (panel && panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else if (panel) {
+                        panel.style.display = "block";
+                    }
+                });
             });
-        });
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
