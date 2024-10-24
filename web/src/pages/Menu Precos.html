@@ -1,226 +1,226 @@
-    <html>
-    <head>
-        <title>Menu de Procedimentos</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="../Styles/Style_Menu Precos.css">
+<html>
+<head>
+    <title>Menu de Procedimentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../Styles/Style_Menu Precos.css">
     </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <a href="index.html">&#x3c; Voltar</a>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+        <h1 style="text-align: center;">Menu de Procedimentos</h1>
+        <div class="treatment-grid">
+            <div class="treatment-card">
+                <h2>Corte com Escova</h2>
+                <p>1 - 2h</p>
+                <p>R$ 90</p>
+                <button onclick="openPopup('Corte com Escova', '1 - 2h', 'R$ 90')">Agendar agora</button>
             </div>
-            <div class="title">Menu de Procedimentos</div>
-            <div class="procedures">
-                <div class="procedure">
-                    <h3>Corte com Escova</h3>
-                    <p>1 - 2h</p>
-                    <p>R$ 90</p>
-                    <button onclick="openPopup('Corte com Escova', '1 - 2h', 'R$ 90')">Agendar agora</button>
+            <div class="treatment-card">
+                <h2>Tintura com Escova</h2>
+                <p>2h</p>
+                <p>R$ 140</p>
+                <button onclick="openPopup('Tintura com Escova', '2h', 'R$ 140')">Agendar agora</button>
+            </div>
+            <div class="treatment-card">
+                <h2>Mecha/Luzes</h2>
+                <p>5 - 7h</p>
+                <p>A partir de R$ 400</p>
+                <button onclick="openPopup('Mecha/Luzes', '5 - 7h', 'A partir de R$ 400')">Agendar agora</button>
+            </div>
+            <div class="treatment-card">
+                <h2>Progressiva</h2>
+                <p>4 - 5h</p>
+                <p>A partir de R$ 400</p>
+                <button onclick="openPopup('Progressiva', '4 - 5h', 'A partir de R$ 400')">Agendar agora</button>
+            </div>
+            <div class="treatment-card">
+                <h2>Botox/Celagem</h2>
+                <p>3 - 4h</p>
+                <p>A partir de R$ 150</p>
+                <button onclick="openPopup('Botox/Celagem', '3 - 4h', 'A partir de R$ 150')">Agendar agora</button>
+            </div>
+            <div class="treatment-card">
+                <h2>Tratamentos</h2>
+                <p>2 - 3h</p>
+                <p>A partir de R$ 100</p>
+                <button onclick="openPopup('Tratamentos', '2 - 3h', 'A partir de R$ 100')">Agendar agora</button>
+            </div>
+        </div>
+    </div>
+    <div class="whatsapp">
+        <a href="https://wa.me/5542999821726" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>Vamos conversar</span>
+        </a>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <div class="header">
+                <h1>Seu agendamento</h1>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <div class="service-box" id="service-box">
+                <p id="service-name"></p>
+                <p>Rua Sarandi, 22, Vila Bela</p>
+                <p id="service-duration-price"></p>
+            </div>
+            <div id="additional-services"></div>
+            <p>Gostaria de adicionar outro serviço a este agendamento?</p>
+            <div class="add-service" onclick="openSecondPopup()">
+                <i class="fas fa-plus"></i>
+                <span>Adicionar serviço</span>
+            </div>
+            <div class="footer">
+                <button onclick="redirectToSchedule()">Selecionar data e horário</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Popup -->
+    <div class="second-popup" id="second-popup">
+        <div class="second-popup-content">
+            <div class="header">
+                <h2>Selecione outro serviço</h2>
+                <span class="close" onclick="closeSecondPopup()">&times;</span>
+            </div>
+            <div class="content">
+                <div class="service-item" style="display: block;">
+                    <label>
+                        <input type="radio" name="service" value="Corte com Escova">
+                        Corte com Escova
+                        <span class="price">1 - 2h • R$ 90</span>
+                    </label>
                 </div>
-                <div class="procedure">
-                    <h3>Tintura com Escova</h3>
-                    <p>2h</p>
-                    <p>R$ 140</p>
-                    <button onclick="openPopup('Tintura com Escova', '2h', 'R$ 140')">Agendar agora</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Tintura com Escova">
+                        Tintura com Escova
+                        <span class="price">2h • R$ 140</span>
+                    </label>
                 </div>
-                <div class="procedure">
-                    <h3>Mecha/Luzes</h3>
-                    <p>5 - 7h</p>
-                    <p>A partir de R$ 400</p>
-                    <button onclick="openPopup('Mecha/Luzes', '5 - 7h', 'A partir de R$ 400')">Agendar agora</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Mecha/Luzes">
+                        Mecha/Luzes
+                        <span class="price">5 - 7h • A partir de R$ 400</span>
+                    </label>
                 </div>
-                <div class="procedure">
-                    <h3>Progressiva</h3>
-                    <p>4 - 5h</p>
-                    <p>A partir de R$ 400</p>
-                    <button onclick="openPopup('Progressiva', '4 - 5h', 'A partir de R$ 400')">Agendar agora</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Progressiva">
+                        Progressiva
+                        <span class="price">4 - 5h • A partir de R$ 400</span>
+                    </label>
                 </div>
-                <div class="procedure">
-                    <h3>Botox/Celagem</h3>
-                    <p>3 - 4h</p>
-                    <p>A partir de R$ 150</p>
-                    <button onclick="openPopup('Botox/Celagem', '3 - 4h', 'A partir de R$ 150')">Agendar agora</button>
+                <div class="service-item">
+                    <label>
+                        <input type="radio" name="service" value="Botox/Celagem">
+                        Botox/Celagem
+                        <span class="price">3 - 4h • A partir de R$ 150</span>
+                    </label>
                 </div>
-                <div class="procedure">
-                    <h3>Tratamentos</h3>
-                    <p>2 - 3h</p>
-                    <p>A partir de R$ 100</p>
-                    <button onclick="openPopup('Tratamentos', '2 - 3h', 'A partir de R$ 100')">Agendar agora</button>
+                <div class="service-item" style="display: block;">
+                    <label>
+                        <input type="radio" name="service" value="Tratamentos">
+                        Tratamentos
+                        <span class="price">2 - 3h • A partir de R$ 100</span>
+                    </label>
                 </div>
             </div>
             <div class="footer">
-                <div class="whatsapp">
-                    <a href="https://wa.me/5542999821726" target="_blank"><i class="fab fa-whatsapp"></i>Vamos conversar</a>
-                </div>
+                <button class="back" onclick="closeSecondPopup()">Voltar</button>
+                <button class="next" onclick="addServiceToPopup()">Próximo</button>
             </div>
         </div>
+    </div>
 
-        <!-- Popup -->
-        <div class="popup" id="popup">
-            <div class="popup-content">
-                <div class="header">
-                    <h1>Seu agendamento</h1>
-                    <span class="close" onclick="closePopup()">&times;</span>
-                </div>
-                <div class="service-box" id="service-box">
-                    <p id="service-name"></p>
-                    <p>Rua Sarandi, 22, Vila Bela</p>
-                    <p id="service-duration-price"></p>
-                </div>
-                <div id="additional-services"></div>
-                <p>Gostaria de adicionar outro serviço a este agendamento?</p>
-                <div class="add-service" onclick="openSecondPopup()">
-                    <i class="fas fa-plus"></i>
-                    <span>Adicionar serviço</span>
-                </div>
-                <div class="footer">
-                    <button onclick="redirectToSchedule()">Selecionar data e horário</button>
-                </div>
-            </div>
-        </div>
+    <script>
+        function openPopup(serviceName, serviceDuration, servicePrice) {
+            const mainServiceName = document.getElementById('service-name').innerText;
+            if (mainServiceName && mainServiceName === serviceName) {
+                alert('Este serviço já foi selecionado como serviço principal.');
+                return;
+            }
+            document.getElementById('service-name').innerText = serviceName;
+            document.getElementById('service-duration-price').innerText = serviceDuration + ' • ' + servicePrice;
+            document.getElementById('popup').style.display = 'flex';
+        }
 
-        <!-- Second Popup -->
-        <div class="second-popup" id="second-popup">
-            <div class="second-popup-content">
-                <div class="header">
-                    <h2>Selecione outro serviço</h2>
-                    <span class="close" onclick="closeSecondPopup()">&times;</span>
-                </div>
-                <div class="content">
-                    <div class="service-item" style="display: block;">
-                        <label>
-                            <input type="radio" name="service" value="Corte com Escova">
-                            Corte com Escova
-                            <span class="price">1 - 2h • R$ 90</span>
-                        </label>
-                    </div>
-                    <div class="service-item">
-                        <label>
-                            <input type="radio" name="service" value="Tintura com Escova">
-                            Tintura com Escova
-                            <span class="price">2h • R$ 140</span>
-                        </label>
-                    </div>
-                    <div class="service-item">
-                        <label>
-                            <input type="radio" name="service" value="Mecha/Luzes">
-                            Mecha/Luzes
-                            <span class="price">5 - 7h • A partir de R$ 400</span>
-                        </label>
-                    </div>
-                    <div class="service-item">
-                        <label>
-                            <input type="radio" name="service" value="Progressiva">
-                            Progressiva
-                            <span class="price">4 - 5h • A partir de R$ 400</span>
-                        </label>
-                    </div>
-                    <div class="service-item">
-                        <label>
-                            <input type="radio" name="service" value="Botox/Celagem">
-                            Botox/Celagem
-                            <span class="price">3 - 4h • A partir de R$ 150</span>
-                        </label>
-                    </div>
-                    <div class="service-item" style="display: block;">
-                        <label>
-                            <input type="radio" name="service" value="Tratamentos">
-                            Tratamentos
-                            <span class="price">2 - 3h • A partir de R$ 100</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="footer">
-                    <button class="back" onclick="closeSecondPopup()">Voltar</button>
-                    <button class="next" onclick="addServiceToPopup()">Próximo</button>
-                </div>
-            </div>
-        </div>
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
 
-        <script>
-            function openPopup(serviceName, serviceDuration, servicePrice) {
+        function openSecondPopup() {
+            document.getElementById('second-popup').style.display = 'flex';
+        }
+
+        function closeSecondPopup() {
+            document.getElementById('second-popup').style.display = 'none';
+        }
+
+        function addServiceToPopup() {
+            const selectedService = document.querySelector('input[name="service"]:checked');
+            if (selectedService) {
+                const serviceName = selectedService.value;
+                const serviceDetails = selectedService.nextElementSibling.innerText;
+
+                // Check if the service is already added
+                const existingServices = document.querySelectorAll('#additional-services .service-box p:first-child');
+                for (let service of existingServices) {
+                    if (service.innerText === serviceName) {
+                        alert('Este serviço já foi adicionado.');
+                        return;
+                    }
+                }
+
+                // Check if the service is the main service
                 const mainServiceName = document.getElementById('service-name').innerText;
-                if (mainServiceName && mainServiceName === serviceName) {
+                if (mainServiceName === serviceName) {
                     alert('Este serviço já foi selecionado como serviço principal.');
                     return;
                 }
-                document.getElementById('service-name').innerText = serviceName;
-                document.getElementById('service-duration-price').innerText = serviceDuration + ' • ' + servicePrice;
-                document.getElementById('popup').style.display = 'flex';
+
+                const serviceBox = document.createElement('div');
+                serviceBox.className = 'service-box';
+                serviceBox.innerHTML = `
+                    <p>${serviceName}</p>
+                    <p>Rua Sarandi, 22, Vila Bela</p>
+                    <p>${serviceDetails}</p>
+                    <button class="delete-btn" onclick="removeService(this)"><i class="fas fa-trash"></i></button>
+                `;
+
+                document.getElementById('additional-services').appendChild(serviceBox);
+                closeSecondPopup();
             }
+        }
 
-            function closePopup() {
-                document.getElementById('popup').style.display = 'none';
-            }
+        function removeService(button) {
+            const serviceBox = button.parentElement;
+            serviceBox.remove();
+        }
 
-            function openSecondPopup() {
-                document.getElementById('second-popup').style.display = 'flex';
-            }
+        function redirectToSchedule() {
+            const serviceName = document.getElementById('service-name').innerText;
+            const serviceDurationPrice = document.getElementById('service-duration-price').innerText;
+            const additionalServices = [];
+            document.querySelectorAll('#additional-services .service-box').forEach(serviceBox => {
+                const service = {
+                    name: serviceBox.querySelector('p:first-child').innerText,
+                    details: serviceBox.querySelector('p:nth-child(3)').innerText
+                };
+                additionalServices.push(service);
+            });
 
-            function closeSecondPopup() {
-                document.getElementById('second-popup').style.display = 'none';
-            }
+            localStorage.setItem('serviceName', serviceName);
+            localStorage.setItem('serviceDurationPrice', serviceDurationPrice);
+            localStorage.setItem('additionalServices', JSON.stringify(additionalServices));
 
-            function addServiceToPopup() {
-                const selectedService = document.querySelector('input[name="service"]:checked');
-                if (selectedService) {
-                    const serviceName = selectedService.value;
-                    const serviceDetails = selectedService.nextElementSibling.innerText;
-
-                    // Check if the service is already added
-                    const existingServices = document.querySelectorAll('#additional-services .service-box p:first-child');
-                    for (let service of existingServices) {
-                        if (service.innerText === serviceName) {
-                            alert('Este serviço já foi adicionado.');
-                            return;
-                        }
-                    }
-
-                    // Check if the service is the main service
-                    const mainServiceName = document.getElementById('service-name').innerText;
-                    if (mainServiceName === serviceName) {
-                        alert('Este serviço já foi selecionado como serviço principal.');
-                        return;
-                    }
-
-                    const serviceBox = document.createElement('div');
-                    serviceBox.className = 'service-box';
-                    serviceBox.innerHTML = `
-                        <p>${serviceName}</p>
-                        <p>Rua Sarandi, 22, Vila Bela</p>
-                        <p>${serviceDetails}</p>
-                        <button class="delete-btn" onclick="removeService(this)"><i class="fas fa-trash"></i></button>
-                    `;
-
-                    document.getElementById('additional-services').appendChild(serviceBox);
-                    closeSecondPopup();
-                }
-            }
-
-            function removeService(button) {
-                const serviceBox = button.parentElement;
-                serviceBox.remove();
-            }
-            function redirectToSchedule() {
-    const serviceName = document.getElementById('service-name').innerText;
-    const serviceDurationPrice = document.getElementById('service-duration-price').innerText;
-    const additionalServices = [];
-    document.querySelectorAll('#additional-services .service-box').forEach(serviceBox => {
-        const service = {
-            name: serviceBox.querySelector('p:first-child').innerText,
-            details: serviceBox.querySelector('p:nth-child(3)').innerText
-        };
-        additionalServices.push(service);
-    });
-
-    localStorage.setItem('serviceName', serviceName);
-    localStorage.setItem('serviceDurationPrice', serviceDurationPrice);
-    localStorage.setItem('additionalServices', JSON.stringify(additionalServices));
-
-    window.location.href = 'Calendario.html';
-
-    
-}
-        </script>
-    </body>
-    </html>
+            window.location.href = 'Calendario.html';
+        }
+    </script>
+</body>
+</html>

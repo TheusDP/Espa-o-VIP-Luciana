@@ -29,55 +29,65 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
 }
-.procedures {
+.treatment-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 20px;
+    justify-content: center;
 }
-.procedure {
-    background-color: white;
+.treatment-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 30%;
-    margin-bottom: 20px;
     padding: 20px;
-    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.procedure h3 {
-    margin-top: 0;
-    font-size: 18px;
+.treatment-card h2 {
+    font-size: 20px;
     font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
 }
-.procedure p {
+.treatment-card p {
+    font-size: 16px;
+    color: #000;
     margin: 5px 0;
 }
-.procedure button {
-    background-color: black;
-    color: white;
+.treatment-card button {
+    background-color: #000;
+    color: #fff;
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
 }
-.procedure button:hover {
+.treatment-card button:hover {
     background-color: #333;
 }
-.footer {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 0;
+.whatsapp {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
-.footer button {
-    display: flex;
-    align-items: center;
-    background-color: white;
+.whatsapp a {
+    text-decoration: none;
+    color: black;
     border: 1px solid black;
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
 }
-.footer button i {
+.whatsapp a i {
     margin-right: 5px;
+}
+.whatsapp a:hover {
+    background-color: rgb(23, 172, 23);
+    color: white;
 }
 /* Popup styles */
 .popup {
@@ -210,18 +220,6 @@ body {
     font-size: 14px;
     color: #666;
 }
-.second-popup-content .accordion {
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    padding: 10px 0;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .second-popup-content .footer {
     display: flex;
     justify-content: space-between;
@@ -241,26 +239,4 @@ body {
 .second-popup-content .footer .next {
     background-color: #000;
     color: #fff;
-}
-.whatsapp {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-.whatsapp a {
-    text-decoration: none;
-    color: black;
-    border: 1px solid black;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-.whatsapp a i {
-    margin-right: 5px;
-}
-.whatsapp a:hover {
-    background-color: rgb(23, 172, 23);
-    color: white;
 }

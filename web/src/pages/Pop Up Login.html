@@ -1,68 +1,170 @@
 <html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            background-color: #b0b0b0;
+ <head>
+  <title>
+   Página de Login
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .left {
+            width: 50%;
+            background-color: #f5e7e4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .left h1 {
+            color: #000;
+            font-size: 48px;
+            margin: 0;
+        }
+        .left h1 span {
+            font-weight: bold;
+        }
+        .left form {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        .left form input[type="email"],
+        .left form input[type="password"],
+        .left form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .left form input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .left form label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #888;
+        }
+        .left form .forgot-password {
+            margin-left: auto;
+            font-size: 14px;
+            color: #888;
+        }
+        .left form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+        }
+        .left .social {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
         }
-        .popup {
-            background-color: #d3d3d3;
-            border: 1px solid #000;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .left .social a {
+            margin: 0 10px;
+            color: #888;
+            font-size: 20px;
         }
-        .input-group {
+        .right {
+            width: 50%;
+            background: linear-gradient(135deg, #ffb6c1, #000);
             display: flex;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
-            border: 1px solid #000;
-            border-radius: 5px;
-            background-color: #d3d3d3;
-            padding: 10px;
-            width: 250px;
         }
-        .input-group i {
-            margin-right: 10px;
-            color: #6e6e6e;
-        }
-        .input-group input {
-            border: none;
-            outline: none;
-            background: none;
-            color: #6e6e6e;
-            font-size: 16px;
+        .right img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .login-button {
-            background-color: #5a5a5a;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
+        .hidden {
+            display: none;
         }
-    </style>
-</head>
-<body>
-    <div class="popup">
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Usuário">
-        </div>
-        <div class="input-group">
-            <i class="fas fa-key"></i>
-            <input type="password" placeholder="Senha">
-        </div>
-        <button class="login-button">Acessar</button>
+  </style>
+  <script>
+   function toggleForm() {
+            var loginForm = document.getElementById('login-form');
+            var signupForm = document.getElementById('signup-form');
+            if (loginForm.classList.contains('hidden')) {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+            }
+        }
+  </script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="left">
+    <h1>
+     Olá,
+     <span>
+      bem-vindo!
+     </span>
+    </h1>
+    <form class="" id="login-form">
+     <input placeholder="Endereço de email" type="email" value="nome@mail.com"/>
+     <input placeholder="Senha" type="password" value="********"/>
+     <label>
+      <input type="checkbox"/>
+      Lembrar-me
+     </label>
+     <a class="forgot-password" href="#">
+      Esqueceu a senha?
+     </a>
+     <button class="login-btn" type="button">
+      Entrar
+     </button>
+     <button class="signup-btn" onclick="toggleForm()" type="button">
+      Registrar-se
+     </button>
+    </form>
+    <form class="hidden" id="signup-form">
+     <input placeholder="Nome completo" type="text"/>
+     <input placeholder="Endereço de email" type="email"/>
+     <input placeholder="Senha" type="password"/>
+     <button class="login-btn" type="button">
+      Registrar-se
+     </button>
+     <button class="signup-btn" onclick="toggleForm()" type="button">
+      Voltar ao Login
+     </button>
+    </form>
+    <div class="social">
+     <span>
+      SIGA-ME
+     </span>
+     <a href="#">
+      <i class="fab fa-facebook-f">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fab fa-instagram">
+      </i>
+     </a>
     </div>
-</body>
+   </div>
+   <div class="right">
+    <img alt="Formas geométricas abstratas com cores vibrantes" height="500" src="https://i.pinimg.com/474x/b7/8f/06/b78f06d25cc162433f320d9c30d47ed1.jpg" width="500"/>
+   </div>
+  </div>
+ </body>
 </html>

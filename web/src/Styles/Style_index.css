@@ -92,63 +92,134 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #d3d3d3;
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-.popup h2 {
-    margin-top: 0;
-    font-family: 'Pacifico', cursive;
-}
-.input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    border: 1px solid #000;
+    background-color: white;
+    padding: 0;
+    border: 1px solid black;
     border-radius: 5px;
-    background-color: #d3d3d3;
-    padding: 10px;
-    width: 250px;
-}
-.input-group i {
-    margin-right: 10px;
-    color: #6e6e6e;
-}
-.input-group input {
-    border: none;
-    outline: none;
-    background: none;
-    color: #6e6e6e;
-    font-size: 16px;
-    width: 100%;
-}
-.login-button, .register-button {
-    background-color: #5a5a5a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 100%;
-}
-.register-link {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-    color: #000;
-    text-decoration: none;
-}
-.register-link:hover {
-    text-decoration: underline;
+    z-index: 1000;
+    width: 80%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 600px;
+    overflow-y: auto;
 }
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
+}
+.input-group {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+.input-group i {
+    margin-right: 10px;
+}
+.input-group input {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    flex: 1;
+}
+.login-button, .register-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.register-link {
+    display: block;
+    margin-top: 10px;
+    color: black;
+    text-decoration: none;
+}
+.container-popup {
+    display: flex;
+    height: 100%;
+}
+.left {
+    width: 50%;
+    background-color: #f5e7e4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.left h1 {
     color: #000;
+    font-size: 48px;
+    margin: 0;
+    font-family: 'Pacifico', cursive;
+}
+.left h1 span {
+    font-weight: bold;
+}
+.left form {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+.left form input[type="email"],
+.left form input[type="password"],
+.left form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.left form input[type="checkbox"] {
+    margin-right: 10px;
+}
+.left form label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+}
+.left form .forgot-password {
+    margin-left: auto;
+    font-size: 14px;
+    color: #888;
+}
+.left form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+}
+.left .social {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left .social a {
+    margin: 0 10px;
+    color: #888;
+    font-size: 20px;
+}
+.right {
+    width: 50%;
+    background: linear-gradient(135deg, #ffb6c1, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hidden {
+    display: none;
 }
