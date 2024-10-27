@@ -3,6 +3,7 @@
     <title>Espaço VIP Luciana</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link rel="stylesheet" href="../Styles/Style_index.css">
     <script>
         function toggleForm() {
             var loginForm = document.getElementById('login-form');
@@ -48,6 +49,16 @@
                 document.getElementById('loginPopup').style.display = 'block';
             }
         }
+
+        function registerUser() {
+            var regUsername = document.getElementById('reg_username').value;
+            var regEmail = document.getElementById('reg_email').value;
+            var regPassword = document.getElementById('reg_password').value;
+
+            // Simulate a registration (replace with actual registration logic)
+            alert('Registration successful!');
+            document.getElementById('signup-form').submit();
+        }
     </script>
 </head>
 <body>
@@ -70,21 +81,21 @@
         <div class="container-popup">
             <div class="left">
                 <h1>Olá, <span>bem-vindo!</span></h1>
-                <form id="login-form">
-                    <input type="email" id="username" placeholder="Endereço de email" value="">
-                    <input type="password" id="password" placeholder="Senha" value="">
+                <form id="login-form" action="login.php" method="post">
+                    <input type="email" id="username" name="username" placeholder="Endereço de email" value="">
+                    <input type="password" id="password" name="password" placeholder="Senha" value="">
                     <label>
                         <input type="checkbox"> Lembrar-me
                     </label>
                     <a class="forgot-password" href="#">Esqueceu a senha?</a>
-                    <button class="login-btn" type="button" onclick="checkUser()">Entrar</button>
+                    <button class="login-btn" type="submit">Entrar</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Registrar-se</button>
                 </form>
-                <form class="hidden" id="signup-form">
-                    <input type="text" placeholder="Nome completo" value="">
-                    <input type="email" placeholder="Endereço de email" value="">
-                    <input type="password" placeholder="Senha" value="">
-                    <button class="login-btn" type="button">Registrar-se</button>
+                <form id="signup-form" class="hidden" action="cadastro.php" method="post">
+                    <input type="text" id="reg_username" name="username" placeholder="Nome completo" value="">
+                    <input type="email" id="reg_email" name="email" placeholder="Endereço de email" value="">
+                    <input type="password" id="reg_password" name="password" placeholder="Senha" value="">
+                    <button class="register-button" type="submit">Registrar-se</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Voltar ao Login</button>
                 </form>
                 <div class="social">
