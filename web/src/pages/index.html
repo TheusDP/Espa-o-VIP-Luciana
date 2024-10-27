@@ -3,7 +3,6 @@
     <title>Espaço VIP Luciana</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <link rel="stylesheet" href="../Styles/Style_index.css">
     <script>
         function toggleForm() {
             var loginForm = document.getElementById('login-form');
@@ -16,10 +15,43 @@
                 signupForm.classList.remove('hidden');
             }
         }
+
+        function checkUser() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Simulate a user check (replace with actual user check logic)
+            var registeredUsers = [
+                { username: 'user1', password: 'password1' },
+                { username: 'user2', password: 'password2' }
+            ];
+
+            var userExists = registeredUsers.some(function(user) {
+                return user.username === username && user.password === password;
+            });
+
+            if (userExists) {
+                document.getElementById('loginButton').style.display = 'none';
+                alert('Login successful!');
+                document.getElementById('loginPopup').style.display = 'none';
+                localStorage.setItem('isLoggedIn', 'true');
+            } else {
+                alert('Invalid username or password.');
+            }
+        }
+
+        function checkLoginStatus() {
+            var isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                window.location.href = 'Menu Precos.html';
+            } else {
+                document.getElementById('loginPopup').style.display = 'block';
+            }
+        }
     </script>
 </head>
 <body>
-    <div class="login">
+    <div class="login" id="loginButton">
         <a href="#" onclick="document.getElementById('loginPopup').style.display='block'"><i class="fas fa-user"></i>Login</a>
     </div>
     <div class="container">
@@ -27,7 +59,7 @@
         <h2 class="title">Espaço VIP Luciana</h2>
         <p class="subtitle">Salão de beleza</p>
         <div class="button">
-            <a href="Menu Precos.html">Agende um horário</a>
+            <a href="#" onclick="checkLoginStatus()">Agende um horário</a>
         </div>
     </div>
     <div class="whatsapp">
@@ -39,19 +71,19 @@
             <div class="left">
                 <h1>Olá, <span>bem-vindo!</span></h1>
                 <form id="login-form">
-                    <input type="email" placeholder="Endereço de email" value="nome@mail.com">
-                    <input type="password" placeholder="Senha" value="********">
+                    <input type="email" id="username" placeholder="Endereço de email" value="">
+                    <input type="password" id="password" placeholder="Senha" value="">
                     <label>
                         <input type="checkbox"> Lembrar-me
                     </label>
                     <a class="forgot-password" href="#">Esqueceu a senha?</a>
-                    <button class="login-btn" type="button">Entrar</button>
+                    <button class="login-btn" type="button" onclick="checkUser()">Entrar</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Registrar-se</button>
                 </form>
                 <form class="hidden" id="signup-form">
-                    <input type="text" placeholder="Nome completo">
-                    <input type="email" placeholder="Endereço de email">
-                    <input type="password" placeholder="Senha">
+                    <input type="text" placeholder="Nome completo" value="">
+                    <input type="email" placeholder="Endereço de email" value="">
+                    <input type="password" placeholder="Senha" value="">
                     <button class="login-btn" type="button">Registrar-se</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Voltar ao Login</button>
                 </form>
