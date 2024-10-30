@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Executar a consulta
     if (mysqli_query($conn, $sql)) {
         // Redirecionar após o cadastro
-        header('Location: index.html');
+        header('Location: index.php');
         exit();
     } else {
         echo "Erro ao cadastrar usuário: " . mysqli_error($conn);

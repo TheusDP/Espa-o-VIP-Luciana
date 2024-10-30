@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="Menu Precos.html"><i class="fas fa-chevron-left"></i> Voltar</a>
+            <a href="Menu Precos.php"><i class="fas fa-chevron-left"></i> Voltar</a>
         </div>
         <div class="title">Selecione uma data e horário</div>
         <div class="subtitle">Horário Padrão de Brasília (BRT)</div>

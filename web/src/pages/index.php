@@ -17,48 +17,40 @@
             }
         }
 
-        function checkUser() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-
-            // Simulate a user check (replace with actual user check logic)
-            var registeredUsers = [
-                { username: 'user1', password: 'password1' },
-                { username: 'user2', password: 'password2' }
-            ];
-
-            var userExists = registeredUsers.some(function(user) {
-                return user.username === username && user.password === password;
-            });
-
-            if (userExists) {
-                document.getElementById('loginButton').style.display = 'none';
-                alert('Login successful!');
-                document.getElementById('loginPopup').style.display = 'none';
-                localStorage.setItem('isLoggedIn', 'true');
-            } else {
-                alert('Invalid username or password.');
-            }
-        }
-
         function checkLoginStatus() {
-            var isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (isLoggedIn === 'true') {
-                window.location.href = 'Menu Precos.html';
-            } else {
-                document.getElementById('loginPopup').style.display = 'block';
-            }
+            fetch('check_login_status.php') // Supondo que você tenha um PHP que verifique o login
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        window.location.href = 'Menu Precos.php';
+                    } else {
+                        document.getElementById('loginPopup').style.display = 'block';
+                        showMessage('Você precisa estar logado para agendar um horário.');
+                    }
+                });
         }
 
-        function registerUser() {
-            var regUsername = document.getElementById('reg_username').value;
-            var regEmail = document.getElementById('reg_email').value;
-            var regPassword = document.getElementById('reg_password').value;
-
-            // Simulate a registration (replace with actual registration logic)
-            alert('Registration successful!');
-            document.getElementById('signup-form').submit();
+        function checkUser() {
+            fetch('check_login_status.php') // Supondo que você tenha um PHP que verifique o login
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        document.getElementById('loginButton').innerHTML = '<a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a>';
+                    }
+                });
         }
+
+        function logout() {
+            fetch('logout.php') // Supondo que você tenha um PHP que faça o logout
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedOut) {
+                        document.getElementById('loginButton').innerHTML = '<a href="#" onclick="document.getElementById(\'loginPopup\').style.display=\'block\'"><i class="fas fa-user"></i>Login</a>';
+                        showMessage('Você saiu do sistema com sucesso.');
+                    }
+                });
+        }
+        window.onload = checkUser;
     </script>
 </head>
 <body>
@@ -81,9 +73,9 @@
         <div class="container-popup">
             <div class="left">
                 <h1>Olá, <span>bem-vindo!</span></h1>
-                <form id="login-form" action="login.php" method="post">
-                    <input type="email" id="username" name="username" placeholder="Endereço de email" value="">
-                    <input type="password" id="password" name="password" placeholder="Senha" value="">
+                <form id="login-form" action="login.php" method="post" onsubmit="showMessage('Login realizado com sucesso!'); return true;">
+                    <input type="email" id="username" name="email" placeholder="Endereço de email" required>
+                    <input type="password" id="password" name="senha" placeholder="Senha" required>
                     <label>
                         <input type="checkbox"> Lembrar-me
                     </label>
@@ -92,9 +84,9 @@
                     <button class="signup-btn" onclick="toggleForm()" type="button">Registrar-se</button>
                 </form>
                 <form id="signup-form" class="hidden" action="cadastro.php" method="post">
-                    <input type="text" id="reg_username" name="username" placeholder="Nome completo" value="">
-                    <input type="email" id="reg_email" name="email" placeholder="Endereço de email" value="">
-                    <input type="password" id="reg_password" name="password" placeholder="Senha" value="">
+                    <input type="text" id="reg_username" name="nome" placeholder="Nome completo" required>
+                    <input type="email" id="reg_email" name="email" placeholder="Endereço de email" required>
+                    <input type="password" id="reg_password" name="senha" placeholder="Senha" required>
                     <button class="register-button" type="submit">Registrar-se</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Voltar ao Login</button>
                 </form>

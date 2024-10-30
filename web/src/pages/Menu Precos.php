@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="index.html" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
+            <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
         <h1 style="text-align: center;">Menu de Procedimentos</h1>
         <div class="treatment-grid">
@@ -219,7 +219,7 @@
             localStorage.setItem('serviceDurationPrice', serviceDurationPrice);
             localStorage.setItem('additionalServices', JSON.stringify(additionalServices));
 
-            window.location.href = 'Calendario.html';
+            window.location.href = 'Calendario.php';
         }
     </script>
 </body>

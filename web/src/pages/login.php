@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 // Processar o login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
+    $email = $conn->real_escape_string($_POST['email']); // Escapar strings
     $senha = $_POST['senha'];
 
     // Consultar usuário no banco de dados
@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($senha, $row['senha'])) {
             // Login bem-sucedido
             $_SESSION['user_id'] = $row['id'];
-            echo "Login bem-sucedido!"; // Redirecionar ou fazer algo mais aqui
+            header('Location: index.php'); // Redireciona para index.php
+            exit(); // Garante que o script não continue após o redirecionamento
         } else {
             echo "Senha incorreta!";
         }
