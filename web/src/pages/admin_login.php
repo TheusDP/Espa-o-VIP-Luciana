@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espaço VIP Luciana</title>
+    <title>Espaço VIP Luciana - Admin Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <link rel="stylesheet" href="../Styles/Style_index.css">
@@ -59,12 +59,12 @@
 </head>
 <body>
     <div class="login" id="loginButton">
-        <a href="#" onclick="document.getElementById('loginPopup').style.display='block'"><i class="fas fa-user"></i>Login</a>
+        <a href="#" onclick="document.getElementById('loginPopup').style.display='block'"><i class="fas fa-user"></i>Login Admin</a>
     </div>
     <div class="container">
-        <h1 class="welcome">Welcome</h1>
+        <h1 class="welcome">Welcome to Admin Panel</h1>
         <h2 class="title">Espaço VIP Luciana</h2>
-        <p class="subtitle">Salão de beleza</p>
+        <p class="subtitle">Área Administrativa</p>
         <div class="button">
             <a href="#" onclick="checkLoginStatus()">Agende um horário</a>
         </div>
@@ -74,12 +74,12 @@
     </div>
     
     <!-- Popup de Login -->
-    <div id="loginPopup" class="popup" style="display: none;">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+    <div id="loginPopup" class="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span> <!-- Botão de fechar -->
         <div class="container-popup">
             <div class="left">
-                <h1>Olá, <span>bem-vindo!</span></h1>
-                <form id="login-form" action="login.php" method="post">
+                <h1>Olá, <span>bem-vindo à área admin!</span></h1>
+                <form id="login-form" action="admin_login.php" method="post" onsubmit="showMessage('Login realizado com sucesso!'); return true;">
                     <input type="email" id="username" name="email" placeholder="Endereço de email" required>
                     <input type="password" id="password" name="senha" placeholder="Senha" required>
                     <label>
@@ -92,7 +92,7 @@
                 <form id="signup-form" class="hidden" action="cadastro.php" method="post">
                     <input type="text" id="reg_username" name="nome" placeholder="Nome completo" required>
                     <input type="email" id="reg_email" name="email" placeholder="Endereço de email" required>
-                    <input type="password" id="reg_password" name="senha" placeholder="Senha (use '#adm' para admin)" required>
+                    <input type="password" id="reg_password" name="senha" placeholder="Senha" required>
                     <button class="register-button" type="submit">Registrar-se</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Voltar ao Login</button>
                 </form>

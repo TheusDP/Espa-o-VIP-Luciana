@@ -2,8 +2,157 @@
 <head>
     <title>Agendamento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../Styles/Styles_Calendario.css">
     <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent; /* Fundo transparente */
+        }
+
+        .container {
+            width: 600px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff; /* Fundo branco para o container */
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header a i {
+            margin-right: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Estilos para o calendário */
+        .calendar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar label {
+            margin-right: 10px;
+        }
+
+        #date-picker {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        #date-picker:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Estilos para seleção de horário */
+        .time-selection {
+            margin-bottom: 20px;
+        }
+
+        .time-selection p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .time-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .time-buttons button.selected {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .time-buttons button.disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+            color: #999;
+        }
+
+        .time-buttons button:hover:not(.disabled):not(.selected) {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Estilos para informações do agendamento */
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .info p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Estilos para o botão do formulário */
+        .footer {
+            text-align: center;
+        }
+
+        .footer button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .footer button:hover {
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
@@ -13,176 +162,72 @@
         </div>
         <div class="title">Selecione uma data e horário</div>
         <div class="subtitle">Horário Padrão de Brasília (BRT)</div>
+
+        <!-- Campo de Data -->
         <div class="calendar">
-            <div class="month-year">
-                <i class="fas fa-chevron-left" onclick="changeMonth(-1)"></i>
-                <span id="month-year">Outubro 2024</span>
-                <i class="fas fa-chevron-right" onclick="changeMonth(1)"></i>
-            </div>
+            <label for="date-picker">Escolha uma data:</label>
+            <input type="date" id="date-picker" name="serviceDate" required>
         </div>
-        <table class="calendar-table">
-            <thead>
-                <tr>
-                    <th>dom.</th>
-                    <th>seg.</th>
-                    <th>ter.</th>
-                    <th>qua.</th>
-                    <th>qui.</th>
-                    <th>sex.</th>
-                    <th>sáb.</th>
-                </tr>
-            </thead>
-            <tbody id="calendar-body">
-                <!-- Calendar days will be generated by JavaScript -->
-            </tbody>
-        </table>
+        
+        <!-- Seleção de Horário -->
         <div class="time-selection">
-            
             <p>Apenas algumas sessões ainda estão disponíveis para agendamento. Os agendamentos serão encerrados 1 minuto antes da sessão iniciar.</p>
             <div class="time-buttons">
                 <button class="disabled">14:30</button>
-                <button onclick="selectTime(this)">15:00</button>
+                <button onclick="selectTime(this)" class="selected">15:00</button>
                 <button onclick="selectTime(this)">15:30</button>
                 <button onclick="selectTime(this)">16:00</button>
                 <button onclick="selectTime(this)">16:30</button>
             </div>
         </div>
+
+        <!-- Informações de Agendamento -->
         <div class="info">
             <p>Informações do agendamento</p>
-            <p id="service-name"></p>
-            <p id="service-duration-price"></p>
-            <div id="additional-services"></div>
+            <p id="service-name">Corte com Escova</p>
+            <p id="service-duration-price">1 - 2h • R$ 90</p>
             <p id="service-address">Rua Sarandi, 22, Vila Bela</p>
         </div>
-        <div class="footer">
-            <button>Próximo</button>
-        </div>
+
+        <!-- Formulário para enviar os dados do agendamento -->
+        <form id="agendamento-form" action="salvar_agendamento.php" method="POST">
+            <input type="hidden" name="serviceName" id="service-name-input" value="Corte com Escova">
+            <input type="hidden" name="serviceDurationPrice" id="service-duration-price-input" value="1 - 2h • R$ 90">
+            <input type="hidden" name="serviceDate" id="service-date-input"> <!-- Campo oculto para a data -->
+            <input type="hidden" name="serviceTime" id="selected-time-input">
+            <input type="hidden" name="serviceAddress" id="service-address-input" value="Rua Sarandi, 22, Vila Bela">
+            <div class="footer">
+                <button type="submit">Próximo</button>
+            </div>
+        </form>
     </div>
+
+    <!-- JavaScript para seleção de horário -->
     <script>
-        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-        const dayNames = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
-        let currentMonth = 9; // Outubro
-        let currentYear = 2024;
-
-        function changeMonth(direction) {
-            currentMonth += direction;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            } else if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            updateCalendar();
-        }
-
-        function updateCalendar() {
-            document.getElementById("month-year").textContent = `${monthNames[currentMonth]} ${currentYear}`;
-            generateCalendarDays(currentMonth, currentYear);
-        }
-
-        function generateCalendarDays(month, year) {
-            const calendarBody = document.getElementById("calendar-body");
-            calendarBody.innerHTML = "";
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            let date = 1;
-
-            for (let i = 0; i < 6; i++) {
-                const row = document.createElement("tr");
-
-                for (let j = 0; j < 7; j++) {
-                    const cell = document.createElement("td");
-                    if (i === 0 && j < firstDay) {
-                        cell.textContent = "";
-                    } else if (date > daysInMonth) {
-                        break;
-                    } else {
-                        const button = document.createElement("button");
-                        button.textContent = date;
-                        button.onclick = () => selectDate(button, date, month, year);
-                        if (date === 1 && month === 9 && year === 2024) {
-                            button.classList.add("selected");
-                        }
-                        cell.appendChild(button);
-                        date++;
-                    }
-                    row.appendChild(cell);
-                }
-                calendarBody.appendChild(row);
-            }
-        }
-
-        function selectDate(button, date, month, year) {
-            const selectedButton = document.querySelector(".calendar-table button.selected");
-            if (selectedButton) {
-                selectedButton.classList.remove("selected");
-            }
-            button.classList.add("selected");
-            const selectedDate = new Date(year, month, date);
-            document.getElementById("selected-date").textContent = `${dayNames[selectedDate.getDay()]}, ${date} de ${monthNames[month]} de ${year}`;
-        }
-
         function selectTime(button) {
             const selectedTimeButton = document.querySelector(".time-buttons button.selected");
-            if (selectedTimeButton) {
-                selectedTimeButton.classList.remove("selected");
-            }
+            if (selectedTimeButton) selectedTimeButton.classList.remove("selected");
             button.classList.add("selected");
+
+            const selectedTime = button.textContent;
+            document.getElementById("selected-time-input").value = selectedTime;
         }
+
+        document.getElementById('date-picker').addEventListener('change', function() {
+            const selectedDate = this.value;
+            document.getElementById("service-date-input").value = selectedDate; // Armazena a data selecionada
+        });
 
         document.addEventListener("DOMContentLoaded", () => {
-            updateCalendar();
-        });
-        const urlParams = new URLSearchParams(window.location.search);
-    const serviceName = urlParams.get('serviceName');
-    const serviceTime = urlParams.get('serviceTime');
-    const servicePrice = urlParams.get('servicePrice');
-
-    if (serviceName && serviceTime && servicePrice) {
-        document.getElementById('service-name').textContent = serviceName;
-        document.getElementById('service-address').textContent = `Rua Sarandi, 22, Vila Bela`;
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-        updateCalendar();
-
-        // Lê os dados do agendamento do LocalStorage
-        const serviceName = localStorage.getItem('serviceName');
-        const serviceDurationPrice = localStorage.getItem('serviceDurationPrice');
-        const additionalServices = JSON.parse(localStorage.getItem('additionalServices'));
-
-        // Exibe os dados do agendamento na página do calendário
-        if (serviceName && serviceDurationPrice) {
-            document.getElementById('service-name').textContent = serviceName;
-            document.getElementById('service-duration-price').textContent = serviceDurationPrice;
-
-            // Exibe os serviços adicionais
-            if (additionalServices) {
-                additionalServices.forEach(service => {
-                    const serviceBox = document.createElement('div');
-                    serviceBox.innerHTML = `
-                        <p>${service.name}</p>
-                        <p>${service.details}</p>
-                    `;
-                    document.getElementById('additional-services').appendChild(serviceBox);
-                });
+            const serviceName = localStorage.getItem('serviceName');
+            const serviceDurationPrice = localStorage.getItem('serviceDurationPrice');
+            if (serviceName && serviceDurationPrice) {
+                document.getElementById('service-name').textContent = serviceName;
+                document.getElementById('service-duration-price').textContent = serviceDurationPrice;
+                document.getElementById('service-name-input').value = serviceName;
+                document.getElementById('service-duration-price-input').value = serviceDurationPrice;
             }
-        }
-    });
-    function selectDate(button, date, month, year) {
-  const selectedButton = document.querySelector(".calendar-table button.selected");
-  if (selectedButton) {
-    selectedButton.classList.remove("selected");
-  }
-  button.classList.add("selected");
-  const selectedDate = new Date(year, month, date);
-  document.getElementById("selected-date").textContent = `${dayNames[selectedDate.getDay()]}, ${date} de ${monthNames[month]} de ${year}`;
-
-  // Altera as informações do dia e mês abaixo do calendário
-  document.getElementById("selected-date").textContent = `${dayNames[selectedDate.getDay()]}, ${date} de ${monthNames[month]} de ${year}`;
-  document.getElementById("selected-month").textContent = `${monthNames[month]}`;
-  document.getElementById("selected-year").textContent = `${year}`;
-}
+        });
     </script>
 </body>
 </html>

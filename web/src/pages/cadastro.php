@@ -16,10 +16,18 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $conn->real_escape_string($_POST['nome']);
     $email = $conn->real_escape_string($_POST['email']);
-    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Criptografa a senha
+    $senha = $_POST['senha'];
+
+    // Verificar se a senha termina com '#adm' para identificar administrador
+    $isAdmin = substr($senha, -4) === '#adm';
+    $senhaOriginal = $isAdmin ? substr($senha, 0, -4) : $senha; // Remove '#adm' se for admin
+    $senhaHash = password_hash($senhaOriginal, PASSWORD_DEFAULT); // Criptografa a senha
+
+    // Definir o tipo de usuário
+    $role = $isAdmin ? 'admin' : 'user';
 
     // Inserir dados na tabela de usuários
-    $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+    $sql = "INSERT INTO usuarios (nome, email, senha, role) VALUES ('$nome', '$email', '$senhaHash', '$role')";
 
     // Executar a consulta
     if (mysqli_query($conn, $sql)) {

@@ -1,11 +1,11 @@
 <?php
-session_start(); // Inicia a sessão
+session_start();
 
 // Conexão com o banco de dados
-$servername = "localhost"; // Altere para o seu servidor
-$username = "root"; // Altere para seu usuário do banco de dados
-$password = ""; // Altere para sua senha do banco de dados
-$dbname = "espaco_vip_luciana"; // Altere para o nome do seu banco de dados
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "espaco_vip_luciana";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,8 +16,12 @@ if ($conn->connect_error) {
 
 // Processar o login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $conn->real_escape_string($_POST['email']); // Escapar strings
+    $email = $conn->real_escape_string($_POST['email']);
     $senha = $_POST['senha'];
+
+    // Verificar se a senha termina com '#adm' para identificar administrador
+    $isAdmin = substr($senha, -4) === '#adm';
+    $senhaOriginal = $isAdmin ? substr($senha, 0, -4) : $senha;
 
     // Consultar usuário no banco de dados
     $sql = "SELECT * FROM usuarios WHERE email='$email'";
@@ -25,12 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        // Verificar se a senha está correta
-        if (password_verify($senha, $row['senha'])) {
-            // Login bem-sucedido
+
+        // Verificar se a senha do usuário está correta
+        if (password_verify($senhaOriginal, $row['senha'])) {
+            // Definir a sessão com base no tipo de acesso
             $_SESSION['user_id'] = $row['id'];
-            header('Location: index.php'); // Redireciona para index.php
-            exit(); // Garante que o script não continue após o redirecionamento
+            $_SESSION['role'] = $isAdmin ? 'admin' : 'user'; // Define a role como 'admin' ou 'user'
+
+            // Redirecionar para a página correta
+            $redirectPage = $isAdmin ? 'admin_login.php' : 'index.php';
+            header("Location: $redirectPage");
+            exit();
         } else {
             echo "Senha incorreta!";
         }

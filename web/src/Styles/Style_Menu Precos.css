@@ -23,6 +23,9 @@ body {
 .header a:hover {
     text-decoration: underline;
 }
+h1 {
+    font-family: 'Pacifico', cursive; /* Define a fonte para o título */
+}
 .title {
     text-align: center;
     font-size: 24px;
