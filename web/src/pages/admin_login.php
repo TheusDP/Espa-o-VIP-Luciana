@@ -15,19 +15,6 @@
             signupForm.classList.toggle('hidden');
         }
 
-        function checkLoginStatus() {
-            fetch('check_login_status.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedIn) {
-                        window.location.href = 'Menu Precos.php';
-                    } else {
-                        document.getElementById('loginPopup').style.display = 'block';
-                        showMessage('Você precisa estar logado para agendar um horário.');
-                    }
-                });
-        }
-
         function checkUser() {
             fetch('check_login_status.php')
                 .then(response => response.json())
@@ -40,15 +27,20 @@
         }
 
         function logout() {
-            fetch('logout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedOut) {
-                        document.getElementById('loginButton').innerHTML = '<a href="#" onclick="document.getElementById(\'loginPopup\').style.display=\'block\'"><i class="fas fa-user"></i>Login</a>';
-                        showMessage('Você saiu do sistema com sucesso.');
-                    }
-                });
-        }
+    fetch('logout.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = 'index.php'; 
+            } else {
+                alert("Erro ao fazer logout.");
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert("Erro ao fazer logout. Tente novamente.");
+        });
+}
+
 
         function closePopup() {
             document.getElementById('loginPopup').style.display = 'none';
@@ -59,18 +51,15 @@
 </head>
 <body>
     <div class="login" id="loginButton">
-        <a href="#" onclick="document.getElementById('loginPopup').style.display='block'"><i class="fas fa-user"></i>Login Admin</a>
+        <a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a> <!-- Alterado para botão de logout -->
     </div>
     <div class="container">
         <h1 class="welcome">Welcome to Admin Panel</h1>
         <h2 class="title">Espaço VIP Luciana</h2>
         <p class="subtitle">Área Administrativa</p>
         <div class="button">
-            <a href="#" onclick="checkLoginStatus()">Agende um horário</a>
+            <a href="menu_editar.php">Editar Menu</a> <!-- Alterado para "Editar Menu" -->
         </div>
-    </div>
-    <div class="whatsapp">
-        <a href="https://wa.me/5542999821726" target="_blank"><i class="fab fa-whatsapp"></i>Vamos conversar</a>
     </div>
     
     <!-- Popup de Login -->

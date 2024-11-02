@@ -1,3 +1,4 @@
+<?php include 'inserir_servicos.php'; // Verifica e insere os serviços automaticamente, se necessário ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -41,12 +42,16 @@
 
         function logout() {
             fetch('logout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedOut) {
-                        document.getElementById('loginButton').innerHTML = '<a href="#" onclick="document.getElementById(\'loginPopup\').style.display=\'block\'"><i class="fas fa-user"></i>Login</a>';
-                        showMessage('Você saiu do sistema com sucesso.');
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = 'index.php'; // Redireciona após logout
+                    } else {
+                        alert("Erro ao fazer logout.");
                     }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert("Erro ao fazer logout. Tente novamente.");
                 });
         }
 
@@ -70,7 +75,10 @@
         </div>
     </div>
     <div class="whatsapp">
-        <a href="https://wa.me/5542999821726" target="_blank"><i class="fab fa-whatsapp"></i>Vamos conversar</a>
+        <a href="https://wa.me/5542999821726" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>Vamos conversar</span>
+        </a>
     </div>
     
     <!-- Popup de Login -->
@@ -80,7 +88,7 @@
             <div class="left">
                 <h1>Olá, <span>bem-vindo!</span></h1>
                 <form id="login-form" action="login.php" method="post">
-                    <input type="email" id="username" name="email" placeholder="Endereço de email" required>
+                    <input type="text" id="username" name="nome" placeholder="Nome completo" required>
                     <input type="password" id="password" name="senha" placeholder="Senha" required>
                     <label>
                         <input type="checkbox"> Lembrar-me
@@ -92,7 +100,7 @@
                 <form id="signup-form" class="hidden" action="cadastro.php" method="post">
                     <input type="text" id="reg_username" name="nome" placeholder="Nome completo" required>
                     <input type="email" id="reg_email" name="email" placeholder="Endereço de email" required>
-                    <input type="password" id="reg_password" name="senha" placeholder="Senha (use '#adm' para admin)" required>
+                    <input type="password" id="reg_password" name="senha" placeholder="Senha" required>
                     <button class="register-button" type="submit">Registrar-se</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Voltar ao Login</button>
                 </form>

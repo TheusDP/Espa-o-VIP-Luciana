@@ -196,6 +196,11 @@
             <input type="hidden" name="serviceDate" id="service-date-input"> <!-- Campo oculto para a data -->
             <input type="hidden" name="serviceTime" id="selected-time-input">
             <input type="hidden" name="serviceAddress" id="service-address-input" value="Rua Sarandi, 22, Vila Bela">
+
+            <!-- Novo campo para o nome do usuário -->
+            <label for="userName">Nome do Usuário:</label>
+            <input type="text" id="userName" name="userName" required><br>
+
             <div class="footer">
                 <button type="submit">Próximo</button>
             </div>

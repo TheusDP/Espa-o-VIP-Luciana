@@ -1,52 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
     <title>Menu de Procedimentos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"> <!-- Importação da fonte -->
     <link rel="stylesheet" href="../Styles/Style_Menu Precos.css">
-    </head>
+</head>
 <body>
+    <?php include 'get_services.php'; ?>
+
     <div class="container">
         <div class="header">
-            <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
+            <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a> <!-- Corrigido para admin_login.php -->
         </div>
-        <h1 style="text-align: center;">Menu de Procedimentos</h1>
+        <h1 class="title">Menu de Procedimentos</h1> <!-- Classe adicionada -->
         <div class="treatment-grid">
-            <div class="treatment-card">
-                <h2>Corte com Escova</h2>
-                <p>1 - 2h</p>
-                <p>R$ 90</p>
-                <button onclick="openPopup('Corte com Escova', '1 - 2h', 'R$ 90')">Agendar agora</button>
-            </div>
-            <div class="treatment-card">
-                <h2>Tintura com Escova</h2>
-                <p>2h</p>
-                <p>R$ 140</p>
-                <button onclick="openPopup('Tintura com Escova', '2h', 'R$ 140')">Agendar agora</button>
-            </div>
-            <div class="treatment-card">
-                <h2>Mecha/Luzes</h2>
-                <p>5 - 7h</p>
-                <p>A partir de R$ 400</p>
-                <button onclick="openPopup('Mecha/Luzes', '5 - 7h', 'A partir de R$ 400')">Agendar agora</button>
-            </div>
-            <div class="treatment-card">
-                <h2>Progressiva</h2>
-                <p>4 - 5h</p>
-                <p>A partir de R$ 400</p>
-                <button onclick="openPopup('Progressiva', '4 - 5h', 'A partir de R$ 400')">Agendar agora</button>
-            </div>
-            <div class="treatment-card">
-                <h2>Botox/Celagem</h2>
-                <p>3 - 4h</p>
-                <p>A partir de R$ 150</p>
-                <button onclick="openPopup('Botox/Celagem', '3 - 4h', 'A partir de R$ 150')">Agendar agora</button>
-            </div>
-            <div class="treatment-card">
-                <h2>Tratamentos</h2>
-                <p>2 - 3h</p>
-                <p>A partir de R$ 100</p>
-                <button onclick="openPopup('Tratamentos', '2 - 3h', 'A partir de R$ 100')">Agendar agora</button>
-            </div>
+            <?php foreach ($servicos as $servico): ?>
+                <div class="treatment-card">
+                    <h2><?php echo htmlspecialchars($servico['nome']); ?></h2>
+                    <p><?php echo htmlspecialchars($servico['duracao']); ?></p>
+                    <p>R$ <?php echo htmlspecialchars($servico['preco']); ?></p>
+                    <button onclick="openPopup('<?php echo addslashes($servico['nome']); ?>', '<?php echo addslashes($servico['duracao']); ?>', 'R$ <?php echo addslashes($servico['preco']); ?>')">Agendar agora</button>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="whatsapp">
@@ -88,48 +65,15 @@
                 <span class="close" onclick="closeSecondPopup()">&times;</span>
             </div>
             <div class="content">
-                <div class="service-item" style="display: block;">
-                    <label>
-                        <input type="radio" name="service" value="Corte com Escova">
-                        Corte com Escova
-                        <span class="price">1 - 2h • R$ 90</span>
-                    </label>
-                </div>
-                <div class="service-item">
-                    <label>
-                        <input type="radio" name="service" value="Tintura com Escova">
-                        Tintura com Escova
-                        <span class="price">2h • R$ 140</span>
-                    </label>
-                </div>
-                <div class="service-item">
-                    <label>
-                        <input type="radio" name="service" value="Mecha/Luzes">
-                        Mecha/Luzes
-                        <span class="price">5 - 7h • A partir de R$ 400</span>
-                    </label>
-                </div>
-                <div class="service-item">
-                    <label>
-                        <input type="radio" name="service" value="Progressiva">
-                        Progressiva
-                        <span class="price">4 - 5h • A partir de R$ 400</span>
-                    </label>
-                </div>
-                <div class="service-item">
-                    <label>
-                        <input type="radio" name="service" value="Botox/Celagem">
-                        Botox/Celagem
-                        <span class="price">3 - 4h • A partir de R$ 150</span>
-                    </label>
-                </div>
-                <div class="service-item" style="display: block;">
-                    <label>
-                        <input type="radio" name="service" value="Tratamentos">
-                        Tratamentos
-                        <span class="price">2 - 3h • A partir de R$ 100</span>
-                    </label>
-                </div>
+                <?php foreach ($servicos as $servico): ?>
+                    <div class="service-item">
+                        <label>
+                            <input type="radio" name="service" value="<?php echo htmlspecialchars($servico['nome']); ?>">
+                            <?php echo htmlspecialchars($servico['nome']); ?>
+                            <span class="price"><?php echo htmlspecialchars($servico['duracao']); ?> • R$ <?php echo htmlspecialchars($servico['preco']); ?></span>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <div class="footer">
                 <button class="back" onclick="closeSecondPopup()">Voltar</button>
@@ -168,7 +112,6 @@
                 const serviceName = selectedService.value;
                 const serviceDetails = selectedService.nextElementSibling.innerText;
 
-                // Check if the service is already added
                 const existingServices = document.querySelectorAll('#additional-services .service-box p:first-child');
                 for (let service of existingServices) {
                     if (service.innerText === serviceName) {
@@ -177,7 +120,6 @@
                     }
                 }
 
-                // Check if the service is the main service
                 const mainServiceName = document.getElementById('service-name').innerText;
                 if (mainServiceName === serviceName) {
                     alert('Este serviço já foi selecionado como serviço principal.');
