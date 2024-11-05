@@ -8,27 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <link rel="stylesheet" href="../Styles/Style_index.css">
-    <style>
-        /* Estilos da mensagem */
-        .welcome-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 10px;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            z-index: 1000;
-            display: none;
-        }
-        .welcome-message.success {
-            background-color: #4CAF50; /* Verde para mensagens de boas-vindas */
-        }
-        .welcome-message.error {
-            background-color: #f44336; /* Vermelho para mensagem de logout */
-        }
-    </style>
     <script>
         function toggleForm() {
             var loginForm = document.getElementById('login-form');
