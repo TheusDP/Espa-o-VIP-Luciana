@@ -7,6 +7,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <link rel="stylesheet" href="../Styles/Style_index.css">
+    <style>
+        .welcome-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            z-index: 1000;
+            display: none; /* Escondido por padrão */
+        }
+
+        .welcome-message.success {
+            background-color: #4CAF50; /* Verde */
+            color: #fff;
+        }
+
+        .welcome-message.error {
+            background-color: #f44336; /* Vermelho */
+            color: #fff;
+        }
+    </style>
     <script>
         function toggleForm() {
             var loginForm = document.getElementById('login-form');
@@ -21,54 +45,81 @@
                 .then(data => {
                     if (data.loggedIn) {
                         document.getElementById('loginButton').innerHTML = '<a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a>';
-                        showMessage('Bem-vindo de volta!');
+                        
+                        // Exibe a mensagem de boas-vindas apenas uma vez após o login
+                        if (sessionStorage.getItem('showWelcome') === 'true') {
+                            showMessage('Bem-vindo de volta!', 'success');
+                            sessionStorage.removeItem('showWelcome'); // Remove a flag para evitar exibição contínua
+                        }
                     }
                 });
         }
 
-        function logout() {
-    fetch('logout.php')
-        .then(response => {
-            if (response.ok) {
-                window.location.href = 'index.php'; 
-            } else {
-                alert("Erro ao fazer logout.");
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert("Erro ao fazer logout. Tente novamente.");
-        });
-}
+        function onLoginSuccess() {
+            sessionStorage.setItem('showWelcome', 'true'); // Marca para exibir a mensagem de boas-vindas no próximo carregamento
+            checkUser();
+        }
 
+        function logout() {
+            fetch('logout.php')
+                .then(response => {
+                    if (response.ok) {
+                        sessionStorage.removeItem('showWelcome'); // Remove a flag ao fazer logout
+                        showMessage('Você saiu com sucesso!', 'error'); // Exibe a mensagem de logout
+                        setTimeout(() => {
+                            window.location.href = 'index.php'; // Redireciona após exibir a mensagem
+                        }, 3000); // Aguarda 3 segundos antes de redirecionar
+                    } else {
+                        alert("Erro ao fazer logout.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert("Erro ao fazer logout. Tente novamente.");
+                });
+        }
+
+        function showMessage(message, type = 'success') {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('welcome-message', type); // Adiciona a classe correspondente ao tipo
+            messageElement.textContent = message;
+            document.body.appendChild(messageElement);
+            messageElement.style.display = 'block';
+
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+                document.body.removeChild(messageElement);
+            }, 3000); // Mensagem desaparece após 3 segundos
+        }
 
         function closePopup() {
             document.getElementById('loginPopup').style.display = 'none';
         }
 
+        // Chama a função checkUser ao carregar a página
         window.onload = checkUser;
     </script>
 </head>
 <body>
     <div class="login" id="loginButton">
-        <a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a> <!-- Alterado para botão de logout -->
+        <a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a>
     </div>
     <div class="container">
         <h1 class="welcome">Welcome to Admin Panel</h1>
         <h2 class="title">Espaço VIP Luciana</h2>
         <p class="subtitle">Área Administrativa</p>
         <div class="button">
-            <a href="menu_editar.php">Editar Menu</a> <!-- Alterado para "Editar Menu" -->
+            <a href="menu_editar.php">Editar Menu</a>
         </div>
     </div>
     
     <!-- Popup de Login -->
     <div id="loginPopup" class="popup">
-        <span class="close-btn" onclick="closePopup()">&times;</span> <!-- Botão de fechar -->
+        <span class="close-btn" onclick="closePopup()">&times;</span>
         <div class="container-popup">
             <div class="left">
                 <h1>Olá, <span>bem-vindo à área admin!</span></h1>
-                <form id="login-form" action="admin_login.php" method="post" onsubmit="showMessage('Login realizado com sucesso!'); return true;">
+                <form id="login-form" action="admin_login.php" method="post" onsubmit="onLoginSuccess(); return true;">
                     <input type="email" id="username" name="email" placeholder="Endereço de email" required>
                     <input type="password" id="password" name="senha" placeholder="Senha" required>
                     <label>

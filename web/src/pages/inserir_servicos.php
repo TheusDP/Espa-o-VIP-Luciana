@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root"; // Substitua pelo seu nome de usuário do MySQL
 $password = ""; // Substitua pela sua senha do MySQL
-$dbname = "espaco_vip_luciana"; // Substitua pelo nome do banco de dados
+$dbname = "espaco_vip_luciana";// Substitua pelo nome do banco de dados
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

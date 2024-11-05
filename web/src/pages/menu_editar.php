@@ -184,7 +184,7 @@ if (!$result) {
                     echo "<div class='treatment-card'>
                         <h2>{$row['nome']}</h2>
                         <p>{$row['duracao']}</p>
-                        <p>R$ {$row['preco']}</p>
+                        <p>{$row['preco']}</p>
                         <button onclick='openPopup({$row['id']}, \"{$row['nome']}\", \"{$row['duracao']}\", \"{$row['preco']}\")'>Editar</button>
                     </div>";
                 }

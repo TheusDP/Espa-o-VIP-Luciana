@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Menu de Procedimentos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"> <!-- Importação da fonte -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <link rel="stylesheet" href="../Styles/Style_Menu Precos.css">
 </head>
 <body>
@@ -12,15 +12,15 @@
 
     <div class="container">
         <div class="header">
-            <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a> <!-- Corrigido para admin_login.php -->
+            <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
-        <h1 class="title">Menu de Procedimentos</h1> <!-- Classe adicionada -->
-        <div class="treatment-grid">
+        <h1 class="title">Menu de Procedimentos</h1>
+        <div class="treatment-grid">    
             <?php foreach ($servicos as $servico): ?>
                 <div class="treatment-card">
                     <h2><?php echo htmlspecialchars($servico['nome']); ?></h2>
                     <p><?php echo htmlspecialchars($servico['duracao']); ?></p>
-                    <p>R$ <?php echo htmlspecialchars($servico['preco']); ?></p>
+                    <p><?php echo htmlspecialchars($servico['preco']); ?></p>
                     <button onclick="openPopup('<?php echo addslashes($servico['nome']); ?>', '<?php echo addslashes($servico['duracao']); ?>', 'R$ <?php echo addslashes($servico['preco']); ?>')">Agendar agora</button>
                 </div>
             <?php endforeach; ?>
@@ -152,7 +152,8 @@
             document.querySelectorAll('#additional-services .service-box').forEach(serviceBox => {
                 const service = {
                     name: serviceBox.querySelector('p:first-child').innerText,
-                    details: serviceBox.querySelector('p:nth-child(3)').innerText
+                    duration: serviceBox.querySelector('p:nth-child(2)').innerText, // Duração
+                    price: serviceBox.querySelector('p:nth-child(3)').innerText.split(' • ')[1] // Preço
                 };
                 additionalServices.push(service);
             });
