@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <link rel="stylesheet" href="../Styles/Style_index.css">
+    <style>
+        /* Estilos da mensagem */
+        .welcome-message {
+            position: fixed;
+            top: 20px;  
+            right: 20px;
+            padding: 10px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+        .welcome-message.success {
+            background-color: #4CAF50; /* Verde para mensagens de boas-vindas */
+        }
+        .welcome-message.error {
+            background-color: #f44336; /* Vermelho para mensagem de logout */
+        }
+    </style>
     <script>
         function toggleForm() {
             var loginForm = document.getElementById('login-form');
@@ -35,16 +56,32 @@
                 .then(data => {
                     if (data.loggedIn) {
                         document.getElementById('loginButton').innerHTML = '<a href="#" onclick="logout()"><i class="fas fa-user"></i>Sair</a>';
-                        showMessage('Bem-vindo de volta!');
+                        if (sessionStorage.getItem('showWelcome') === 'true') {
+                            showMessage('Bem-vindo!', 'success');
+                            sessionStorage.removeItem('showWelcome');
+                        }
                     }
                 });
+        }
+
+        function onLoginSuccess() {
+            sessionStorage.setItem('showWelcome', 'true');
+            checkUser();
+        }
+
+        function onSignupSuccess() {
+            showMessage('Cadastro realizado com sucesso! Bem-vindo!', 'success');
         }
 
         function logout() {
             fetch('logout.php')
                 .then(response => {
                     if (response.ok) {
-                        window.location.href = 'index.php'; // Redireciona após logout
+                        sessionStorage.removeItem('showWelcome');
+                        showMessage('Você saiu com sucesso!', 'error');
+                        setTimeout(() => {
+                            window.location.href = 'index.php';
+                        }, 3000);
                     } else {
                         alert("Erro ao fazer logout.");
                     }
@@ -53,6 +90,19 @@
                     console.error('Erro:', error);
                     alert("Erro ao fazer logout. Tente novamente.");
                 });
+        }
+
+        function showMessage(message, type = 'success') {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('welcome-message', type);
+            messageElement.textContent = message;
+            document.body.appendChild(messageElement);
+            messageElement.style.display = 'block';
+
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+                document.body.removeChild(messageElement);
+            }, 3000);
         }
 
         function closePopup() {
@@ -87,7 +137,7 @@
         <div class="container-popup">
             <div class="left">
                 <h1>Olá, <span>bem-vindo!</span></h1>
-                <form id="login-form" action="login.php" method="post">
+                <form id="login-form" action="login.php" method="post" onsubmit="onLoginSuccess()">
                     <input type="text" id="username" name="nome" placeholder="Nome completo" required>
                     <input type="password" id="password" name="senha" placeholder="Senha" required>
                     <label>
@@ -97,7 +147,7 @@
                     <button class="login-btn" type="submit">Entrar</button>
                     <button class="signup-btn" onclick="toggleForm()" type="button">Registrar-se</button>
                 </form>
-                <form id="signup-form" class="hidden" action="cadastro.php" method="post">
+                <form id="signup-form" class="hidden" action="cadastro.php" method="post" onsubmit="onSignupSuccess()">
                     <input type="text" id="reg_username" name="nome" placeholder="Nome completo" required>
                     <input type="email" id="reg_email" name="email" placeholder="Endereço de email" required>
                     <input type="password" id="reg_password" name="senha" placeholder="Senha" required>

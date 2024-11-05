@@ -1,121 +1,150 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #fdf6e3;
-    color: #000;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.container {
-    width: 600px;
-    padding: 20px;
-    text-align: center;
-}
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.header a {
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-}
-.header a i {
-    margin-right: 5px;
-}
-.title {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.subtitle {
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-.calendar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.calendar label {
-    margin-right: 10px;
-}
-.calendar input {
-    font-size: 16px;
-    padding: 5px;
-}
-.time-selection {
-    margin-bottom: 20px;
-}
-.time-selection p {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-.time-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.time-buttons button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    background-color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.time-buttons button.selected {
-    background-color: #000;
-    color: #fff;
-}
-.time-buttons button.disabled {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-}
-.time-buttons button:hover:not(.disabled):not(.selected) {
-    background-color: #000;
-    color: #fff;
-}
-.info {
-    margin-bottom: 20px;
-}
-.info p {
-    font-size: 14px;
-    margin: 5px 0;
-}
-.footer {
-    text-align: center;
-}
-.footer button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-}
-.footer button:hover {
-    background-color: #333;
-}
-/* Estilo para o campo de data */
-#date-picker {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border 0.3s ease;
-    width: 100%;
-    max-width: 200px;
-}
-#date-picker:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
+        /* Estilos gerais */
+        body {  
+            font-family: Arial, sans-serif;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent;
+        }
+
+        .container {
+            width: 600px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header a i {
+            margin-right: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Estilos para o calendário */
+        .calendar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar label {
+            margin-right: 10px;
+        }
+
+        #date-picker {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        #date-picker:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Estilos para seleção de horário */
+        .time-selection {
+            margin-bottom: 20px;
+        }
+
+        .time-selection p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .time-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .time-buttons button.selected {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .time-buttons button.disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+            color: #999;
+        }
+
+        .time-buttons button:hover:not(.disabled):not(.selected) {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Estilos para informações do agendamento */
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .info p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Estilos para o botão do formulário */
+        .footer {
+            text-align: center;
+        }
+
+        .footer button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .footer button:hover {
+            background-color: #333;
+        }
