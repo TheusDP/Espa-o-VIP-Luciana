@@ -14,22 +14,21 @@
         <div class="header">
             <a href="index.php" class="back"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
-        <h1 class="title">Menu de Procedimentos</h1> <!-- Classe adicionada -->
+        <h1 class="title">Menu de Procedimentos</h1>
         <div class="treatment-grid">
             <?php foreach ($servicos as $servico): ?>
                 <div class="treatment-card">
                     <h2><?php echo htmlspecialchars($servico['nome']); ?></h2>
                     <p><?php echo htmlspecialchars($servico['duracao']); ?></p>
-                    <p>R$ <?php echo htmlspecialchars($servico['preco']); ?></p>
+                    <p><?php echo htmlspecialchars($servico['preco']); ?></p>
                     <button onclick="openPopup('<?php echo addslashes($servico['nome']); ?>', '<?php echo addslashes($servico['duracao']); ?>', 'R$ <?php echo addslashes($servico['preco']); ?>')">Agendar agora</button>
                 </div>
             <?php endforeach; ?>
         </div>
-        
-        <!-- Botão para ver agendamentos -->
+
         <button class="view-agendamentos" onclick="openAgendamentosPopup()">Ver Agendamentos</button>
     </div>
-    
+
     <div class="whatsapp">
         <a href="https://wa.me/5542999821726" target="_blank">
             <i class="fab fa-whatsapp"></i>
@@ -62,7 +61,6 @@
                 <p>Rua Sarandi, 22, Vila Bela</p>
                 <p id="service-duration-price"></p>
             </div>
-            <div id="additional-services"></div>
             <p>Gostaria de adicionar outro serviço a este agendamento?</p>
             <div class="add-service" onclick="openSecondPopup()">
                 <i class="fas fa-plus"></i>
@@ -100,115 +98,132 @@
     </div>
 
     <script>
-        function openPopup(serviceName, serviceDuration, servicePrice) {
+    function openPopup(serviceName, serviceDuration, servicePrice) {
+        const mainServiceName = document.getElementById('service-name').innerText;
+        if (mainServiceName && mainServiceName === serviceName) {
+            alert('Este serviço já foi selecionado como serviço principal.');
+            return;
+        }
+        document.getElementById('service-name').innerText = serviceName;
+        document.getElementById('service-duration-price').innerText = serviceDuration + ' • ' + servicePrice;
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    function openSecondPopup() {
+        document.getElementById('second-popup').style.display = 'flex';
+    }
+
+    function closeSecondPopup() {
+        document.getElementById('second-popup').style.display = 'none';
+    }
+
+    function addServiceToPopup() {
+        const selectedService = document.querySelector('input[name="service"]:checked');
+        if (selectedService) {
+            const serviceName = selectedService.value;
+
+            // Verificando se o serviço já foi adicionado
+            const existingServices = document.querySelectorAll('#additional-services .service-box p:first-child');
+            for (let service of existingServices) {
+                if (service.innerText === serviceName) {
+                    alert('Este serviço já foi adicionado.');
+                    return;
+                }
+            }
+
+            // Verificando se o serviço é o principal
             const mainServiceName = document.getElementById('service-name').innerText;
-            if (mainServiceName && mainServiceName === serviceName) {
+            if (mainServiceName === serviceName) {
                 alert('Este serviço já foi selecionado como serviço principal.');
                 return;
             }
-            document.getElementById('service-name').innerText = serviceName;
-            document.getElementById('service-duration-price').innerText = serviceDuration + ' • ' + servicePrice;
-            document.getElementById('popup').style.display = 'flex';
+
+            // Adicionando o serviço à lista de serviços adicionais
+            const serviceBox = document.createElement('div');
+            serviceBox.className = 'service-box';
+            serviceBox.innerHTML = ` 
+                <p>${serviceName}</p>
+                <button class="delete-btn" onclick="removeService(this)"><i class="fas fa-trash"></i></button>
+            `;
+            document.getElementById('additional-services').appendChild(serviceBox);
+            closeSecondPopup();
+        } else {
+            alert('Por favor, selecione um serviço para adicionar.');
         }
+    }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
+    function removeService(button) {
+        const serviceBox = button.parentElement;
+        serviceBox.remove();
+    }
 
-        function openSecondPopup() {
-            document.getElementById('second-popup').style.display = 'flex';
-        }
+    function redirectToSchedule() {
+        const serviceName = document.getElementById('service-name').innerText;
+        const additionalServices = [];
+        
+        // Capturando os serviços adicionais
+        document.querySelectorAll('#additional-services .service-box').forEach(serviceBox => {
+            const service = {
+                name: serviceBox.querySelector('p:first-child').innerText,
+            };
+            additionalServices.push(service);
+        });
 
-        function closeSecondPopup() {
-            document.getElementById('second-popup').style.display = 'none';
-        }
+        // Salvando os dados no localStorage
+        localStorage.setItem('serviceName', serviceName);
+        localStorage.setItem('additionalServices', JSON.stringify(additionalServices));
 
-        function addServiceToPopup() {
-            const selectedService = document.querySelector('input[name="service"]:checked');
-            if (selectedService) {
-                const serviceName = selectedService.value;
-                const serviceDetails = selectedService.nextElementSibling.innerText;
+        // Redirecionando para a página de agendamento
+        window.location.href = 'Calendario.php';
+    }
 
-                const existingServices = document.querySelectorAll('#additional-services .service-box p:first-child');
-                for (let service of existingServices) {
-                    if (service.innerText === serviceName) {
-                        alert('Este serviço já foi adicionado.');
-                        return;
-                    }
-                }
-
-                const mainServiceName = document.getElementById('service-name').innerText;
-                if (mainServiceName === serviceName) {
-                    alert('Este serviço já foi selecionado como serviço principal.');
-                    return;
-                }
-
-                const serviceBox = document.createElement('div');
-                serviceBox.className = 'service-box';
-                serviceBox.innerHTML = `
-                    <p>${serviceName}</p>
-                    <p>Rua Sarandi, 22, Vila Bela</p>
-                    <p>${serviceDetails}</p>
-                    <button class="delete-btn" onclick="removeService(this)"><i class="fas fa-trash"></i></button>
-                `;
-
-                document.getElementById('additional-services').appendChild(serviceBox);
-                closeSecondPopup();
-            }
-        }
-
-        function removeService(button) {
-            const serviceBox = button.parentElement;
-            serviceBox.remove();
-        }
-
-        function redirectToSchedule() {
-            const serviceName = document.getElementById('service-name').innerText;
-            const serviceDurationPrice = document.getElementById('service-duration-price').innerText;
-            const additionalServices = [];
-            document.querySelectorAll('#additional-services .service-box').forEach(serviceBox => {
-                const service = {
-                    name: serviceBox.querySelector('p:first-child').innerText,
-                    duration: serviceBox.querySelector('p:nth-child(2)').innerText, // Duração
-                    price: serviceBox.querySelector('p:nth-child(3)').innerText.split(' • ')[1] // Preço
-                };
-                additionalServices.push(service);
-            });
-
-            localStorage.setItem('serviceName', serviceName);
-            localStorage.setItem('serviceDurationPrice', serviceDurationPrice);
-            localStorage.setItem('additionalServices', JSON.stringify(additionalServices));
-
-            window.location.href = 'Calendario.php';
-        }
-
-        function openAgendamentosPopup() {
-            fetch('get_agendamentos.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const agendamentos = data.agendamentos.map(agendamento => `
-                            <div class="service-box">
-                                <p>Serviço: ${agendamento.service_name}</p>
-                                <p>Data: ${agendamento.service_date}</p>
-                                <p>Horário: ${agendamento.service_time}</p>
+    function openAgendamentosPopup() {
+        fetch('get_agendamentos.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Gerando o conteúdo dos agendamentos
+                    const agendamentos = data.agendamentos.map(agendamento => `
+                        <div class="service-box">
+                            <p>Serviço Principal: ${agendamento.service_name}</p>
+                            <p>Data: ${agendamento.service_date}</p>
+                            <p>Hora: ${agendamento.service_time}</p>
+                            <h3>Serviços Adicionais:</h3>
+                            <div class="additional-services">
+                                ${agendamento.additional_services.map(service => `
+                                    <div>
+                                        <p>${service.service_name}</p>
+                                        <p>Data: ${agendamento.service_date}</p>
+                                        <p>Hora: ${agendamento.service_time}</p>
+                                    </div>
+                                `).join('')}
                             </div>
-                        `).join('');
-                        document.getElementById('agendamentos-content').innerHTML = agendamentos;
-                    } else {
-                        document.getElementById('agendamentos-content').innerHTML = '<p>Nenhum agendamento encontrado.</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar agendamentos:', error);
-                    document.getElementById('agendamentos-content').innerHTML = '<p>Erro ao carregar agendamentos.</p>';
-                });
-            document.getElementById('agendamentos-popup').style.display = 'flex';
-        }
+                        </div>
+                    `).join('');
 
-        function closeAgendamentosPopup() {
-            document.getElementById('agendamentos-popup').style.display = 'none';
+                    document.getElementById('agendamentos-content').innerHTML = agendamentos;
+                    document.getElementById('agendamentos-popup').style.display = 'flex';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Erro ao carregar agendamentos:', error));
+    }
+
+    function closeAgendamentosPopup() {
+        document.getElementById('agendamentos-popup').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const popup = document.getElementById('agendamentos-popup');
+        if (event.target === popup) {
+            closeAgendamentosPopup();
         }
+    }
     </script>
 </body>
 </html>
